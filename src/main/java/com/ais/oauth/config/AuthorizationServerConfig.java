@@ -15,14 +15,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
+	
+	/** 
+	 * Configurando o gerenciador de autenticação e serviços de token.
+	 * @param endpoint
+	 */
+	
 	@Override
-	public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
 		endpoints.authenticationManager(authenticationManager);
 	}
-
+	
+	/**
+	 * Configurando os clientes com id do cliente, senha, escopo de acesso, tipo de concessão e tempo de expiração do token de acesso.
+	 * @param clients
+	 * @throws Exception
+	 */
+	
 	@Override
-	public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
 			.withClient("client")
 			.secret("password")
@@ -37,7 +48,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.accessTokenValiditySeconds(60);
 
 	}
-
+	
+	/**
+	 * Configurando as restrições de segurança da verificação do token de acesso.
+	 * @param auth.
+	 */
+	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer auth) {
 		auth.checkTokenAccess("isAuthenticated()");

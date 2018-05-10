@@ -13,6 +13,7 @@ public class EmployeeResource {
 	@GetMapping(produces="application/json")
 	public Employee getEmployee() {
 		Employee e = new Employee();
+		e.setId((long) 1);
 		e.setName("John");
 		e.setAge(27);
 		

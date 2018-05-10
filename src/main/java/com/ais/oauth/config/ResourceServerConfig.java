@@ -13,14 +13,26 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableWebSecurity
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
+	/**
+	 * Configurando o Proprietário do Recurso com username, senha e função.
+	 * @param manager
+	 * @throws Exception
+	 */
+	
 	@Autowired
-	public void configureGlobal(final AuthenticationManagerBuilder manager) throws Exception {
+	public void configureGlobal(AuthenticationManagerBuilder manager) throws Exception {
 		
 		manager.inMemoryAuthentication()
 			.withUser("user")
 			.password("password")
 			.roles("USER");
 	}
+	
+	/**
+	 * Configurando restrições de acesso aos recursos.
+	 * @param http
+	 * @throws Exception
+	 */
 	
 	@Override
 	public void configure (HttpSecurity http) throws Exception {
